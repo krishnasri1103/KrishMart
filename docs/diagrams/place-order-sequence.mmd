@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant B as Browser
+  participant S as OrderServlet
+  participant SV as OrderService
+  participant D as OrderDAO
+  participant DB as H2 Database
+  B->>S: POST checkout
+  S->>SV: validate session and cart
+  SV->>D: create order and order items
+  D->>DB: PreparedStatement transaction
+  DB-->>D: commit / generated order id
+  D-->>SV: order result
+  SV-->>S: success response
+  S-->>B: confirmation page / JSON

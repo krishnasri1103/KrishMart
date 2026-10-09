@@ -1,0 +1,1 @@
+<%@ page isErrorPage="true" %><%@ include file="header.jsp" %><section class="panel"><h1>That didn’t work.</h1><p><c:out value="${errorMessage != null ? errorMessage : 'The request could not be completed.'}"/></p><a class="btn" href="${pageContext.request.contextPath}/products">Back to marketplace</a></section><%@ include file="footer.jsp" %>

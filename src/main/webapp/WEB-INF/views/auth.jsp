@@ -1,0 +1,8 @@
+<%@ include file="header.jsp" %>
+<section class="auth panel"><h1><c:choose><c:when test="${authAction == 'register'}">Create your account</c:when><c:otherwise>Welcome back</c:otherwise></c:choose></h1><p class="muted">Buy from independent sellers or set up your own storefront.</p><c:if test="${not empty errorMessage}"><div class="error"><c:out value="${errorMessage}"/></div></c:if>
+<form class="stack" method="post" action="${pageContext.request.contextPath}/auth">
+<input type="hidden" name="action" value="<c:out value='${authAction}'/>">
+<c:if test="${authAction == 'register'}"><label>Name<input class="input" name="name" required maxlength="120"></label><label>Account type<select class="input" name="role"><option value="BUYER">Buyer</option><option value="SELLER">Seller</option></select></label></c:if>
+<label>Email<input class="input" type="email" name="email" required maxlength="255"></label><label>Password<input class="input" type="password" name="password" required minlength="8" maxlength="72"></label><button class="btn" type="submit"><c:choose><c:when test="${authAction == 'register'}">Create account</c:when><c:otherwise>Log in</c:otherwise></c:choose></button>
+</form><p class="muted"><c:choose><c:when test="${authAction == 'register'}">Already registered? <a href="${pageContext.request.contextPath}/auth?action=login">Log in</a></c:when><c:otherwise>New here? <a href="${pageContext.request.contextPath}/auth?action=register">Create an account</a></c:otherwise></c:choose></p><p class="muted">Demo accounts: buyer@krishmart.local, seller@krishmart.local, admin@krishmart.local — password: password</p></section>
+<%@ include file="footer.jsp" %>

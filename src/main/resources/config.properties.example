@@ -1,0 +1,5 @@
+db.url=jdbc:h2:./data/krishmart;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+db.username=sa
+db.password=
+pool.maximumSize=10
+session.timeout.minutes=30

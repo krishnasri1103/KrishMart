@@ -1,0 +1,3 @@
+<%@ include file="header.jsp" %>
+<h1>Incoming orders</h1><c:if test="${empty orders}"><div class="panel"><p class="muted">No orders contain your products yet.</p></div></c:if><c:forEach var="order" items="${orders}"><div class="panel"><strong>Order #<c:out value="${order.id}"/></strong> · Buyer <c:out value="${order.buyerName}"/> · <span class="btn small secondary"><c:out value="${order.status}"/></span><p class="muted">₹<c:out value="${order.totalAmount}"/> · <c:out value="${order.createdAt}"/></p><ul><c:forEach var="item" items="${order.items}"><li><c:out value="${item.productName}"/> × <c:out value="${item.quantity}"/></li></c:forEach></ul></div></c:forEach>
+<%@ include file="footer.jsp" %>

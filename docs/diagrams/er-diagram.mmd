@@ -1,0 +1,49 @@
+erDiagram
+  USERS ||--o{ PRODUCTS : sells
+  USERS ||--o{ ORDERS : places
+  ORDERS ||--|{ ORDER_ITEMS : contains
+  PRODUCTS ||--o{ ORDER_ITEMS : included_in
+  USERS ||--o{ CART_ITEMS : owns
+  PRODUCTS ||--o{ CART_ITEMS : added_to
+  USERS ||--o{ REVIEWS : writes
+  PRODUCTS ||--o{ REVIEWS : receives
+  USERS { bigint id PK
+    varchar name
+    varchar email UK
+    varchar password_hash
+    varchar role
+    timestamp created_at
+  }
+  PRODUCTS { bigint id PK
+    bigint seller_id FK
+    varchar name
+    decimal price
+    int stock_qty
+    varchar category
+    timestamp created_at
+  }
+  ORDERS { bigint id PK
+    bigint buyer_id FK
+    varchar status
+    decimal total_amount
+    timestamp created_at
+  }
+  ORDER_ITEMS { bigint id PK
+    bigint order_id FK
+    bigint product_id FK
+    int quantity
+    decimal unit_price
+  }
+  CART_ITEMS { bigint id PK
+    bigint user_id FK
+    bigint product_id FK
+    int quantity
+    timestamp created_at
+  }
+  REVIEWS { bigint id PK
+    bigint product_id FK
+    bigint user_id FK
+    int rating
+    varchar comment
+    timestamp created_at
+  }

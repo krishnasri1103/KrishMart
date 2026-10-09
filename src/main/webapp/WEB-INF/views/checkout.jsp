@@ -1,0 +1,3 @@
+<%@ include file="header.jsp" %>
+<h1>Confirm checkout</h1><div class="panel"><h2>Mock payment</h2><p class="muted">This demo does not contact a payment gateway. Confirming below simulates a successful payment and places the order.</p><ul><c:forEach var="item" items="${items}"><li><c:out value="${item.productName}"/> × <c:out value="${item.quantity}"/></li></c:forEach></ul><p><strong>Total: ₹<c:out value="${total}"/></strong></p><form method="post" action="${pageContext.request.contextPath}/app/checkout"><label><input type="checkbox" name="paymentConfirmed" value="true" required> I confirm the mock payment</label><br><br><button class="btn" type="submit">Place order</button></form></div>
+<%@ include file="footer.jsp" %>
