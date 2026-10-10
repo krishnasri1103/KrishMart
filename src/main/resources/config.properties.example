@@ -3,3 +3,6 @@ db.username=sa
 db.password=
 pool.maximumSize=10
 session.timeout.minutes=30
+ai.chatbot.provider=gemini
+gemini.api.key=YOUR_API_KEY_HERE
+gemini.api.url=https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent
