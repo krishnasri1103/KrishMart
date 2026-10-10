@@ -1,6 +1,7 @@
 # Multi-stage build: compile with JDK 17, run on the required Tomcat 9 / javax.servlet stack.
 FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /build
+COPY .mvn/settings.xml /root/.m2/settings.xml
 COPY pom.xml .
 COPY src ./src
 RUN mvn -B clean package -DskipTests
