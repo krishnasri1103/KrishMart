@@ -1,0 +1,36 @@
+version: '3.8'
+
+# Spec Section 10: "Publicly accessible URL, data persisting across restarts"
+services:
+  krishnamart:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: krishnamart-app
+    ports:
+      - "8080:8080"   # App (Tomcat)
+      - "9092:9092"   # H2 TCP server (optional: H2 Console access)
+    volumes:
+      - krishnamart-data:/opt/krishnamart/data   # H2 .mv.db persistence
+    environment:
+      # Spec Section 10 JDBC URL: server mode
+      - DB_URL=jdbc:h2:tcp://localhost:9092/./data/krishnamart
+      - DB_USER=sa
+      - DB_PASSWORD=
+      - DB_POOL_MAX_SIZE=10
+      - DB_POOL_MIN_IDLE=2
+      # Spec Section 17: swap to 'gemini' and set API key for AI feature
+      - AI_CHATBOT_PROVIDER=mock
+      - AI_CHATBOT_API_KEY=
+    restart: unless-stopped
+    healthcheck:
+      # Spec Section 18: GET /api/v1/health must return {"status":"UP","db":"UP"}
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  krishnamart-data:
+    driver: local
